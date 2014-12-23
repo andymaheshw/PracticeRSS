@@ -11,13 +11,25 @@ import goslate
 from bs4 import BeautifulSoup
 from books.models import Book
 
+from django.contrib.auth import logout
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
+
 import urllib2
 from urllib2 import urlopen
 
 def hello(request):
 	return HttpResponse("Hello world")
 
+def main_page(request):
+    return render_to_response('index.html')
 
+def logout_page(request):
+    """
+    Log users out and re-direct them to the main page.
+    """
+    logout(request)
+    return HttpResponseRedirect('/')
 
 def current_datetime(request):
 	now = datetime.datetime.now()
